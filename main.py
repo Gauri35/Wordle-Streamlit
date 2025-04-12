@@ -14,7 +14,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.choice(WORDS)
 
 SECRET_WORD = st.session_state.secret
-print(SECRET_WORD)
+#print(SECRET_WORD)
 
 st.markdown("""
     <h1 style='
