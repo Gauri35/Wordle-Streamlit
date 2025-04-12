@@ -1,4 +1,20 @@
 import streamlit as st
+import random
+
+# Load 5-letter words
+@st.cache_data
+def load_words():
+    with open("words.txt") as f:
+        return [word.strip().upper() for word in f if len(word.strip()) == 5 and word.strip().isalpha()]
+
+WORDS = load_words()
+
+# Select secret word
+if "secret" not in st.session_state:
+    st.session_state.secret = random.choice(WORDS)
+
+SECRET_WORD = st.session_state.secret
+print(SECRET_WORD)
 
 st.markdown("""
     <h1 style='
@@ -13,9 +29,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.subheader("Guess the 5-letter word in 6 tries or less.")
-
-# Secret answer
-SECRET_WORD = "GRAPE"
 
 # Session state init
 if "guesses" not in st.session_state:
